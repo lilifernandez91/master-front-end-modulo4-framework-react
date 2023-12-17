@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -111,11 +111,24 @@ export const LoginPage: React.FC = () => {
     );
   };
 
+  const getBtn = () => {
+    return (
+      <Link className="table-link" to="/">
+        <Box sx={{ m: 1 }}>
+          <Fab color="primary" variant="extended">
+            Volver a inicio
+          </Fab>
+        </Box>
+      </Link>
+    );
+  };
+
   return (
     <div className="form-content">
       <form className="form" onSubmit={handleNavigation}>
         {getForm()}
       </form>
+      {getBtn()}
       {getModal()}
     </div>
   );

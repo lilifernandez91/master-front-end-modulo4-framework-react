@@ -125,7 +125,7 @@ export const ListPage: React.FC = () => {
 
   const getBtn = () => {
     return (
-      <Link className="table-link" to="/">
+      <Link className="table-link" to="/login">
         <Box sx={{ m: 1 }}>
           <Fab color="primary" variant="extended">
             Volver
