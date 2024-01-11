@@ -23,7 +23,6 @@ export const RickAndMorty: React.FC = () => {
       .then((response) => response.json())
       .then((json: ApiResponse) => {
         setData(json);
-        console.log(json);
       });
   }, []);
 

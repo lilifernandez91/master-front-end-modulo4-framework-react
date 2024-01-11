@@ -10,6 +10,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { Alert } from "@mui/material";
+import { CheckCircleOutline } from "@mui/icons-material";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -22,7 +24,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState("Lemoncode");
+  const [username, setUsername] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -64,8 +66,9 @@ export const LoginPage: React.FC = () => {
         >
           <TextField
             id="outlined-basic"
-            label={username}
+            label="Organización"
             variant="outlined"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </Box>
@@ -74,6 +77,9 @@ export const LoginPage: React.FC = () => {
             Buscar
           </Fab>
         </Box>
+        <span className="login-text">
+          *Puedes filtrar por Lemoncode o Microsoft
+        </span>
       </>
     );
   };
@@ -103,7 +109,7 @@ export const LoginPage: React.FC = () => {
           </IconButton>
           <DialogContent dividers>
             <Typography gutterBottom>
-              Nombre de la organización incorrecto
+              Nombre de la organización incorrecto. Inténtalo de nuevo.
             </Typography>
           </DialogContent>
         </BootstrapDialog>

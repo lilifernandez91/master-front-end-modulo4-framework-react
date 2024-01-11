@@ -8,7 +8,9 @@ export const Inicio: React.FC = () => {
     return (
       <Stack spacing={2} direction="row">
         <Link to="/login">
-          <Button variant="outlined">Ir a API de Organización</Button>
+          <Button variant="outlined" className="init-btn">
+            Ir a API de Organización
+          </Button>
         </Link>
       </Stack>
     );
@@ -18,7 +20,9 @@ export const Inicio: React.FC = () => {
     return (
       <Stack spacing={2} direction="row">
         <Link to="/rick-and-morty">
-          <Button variant="outlined">Ir a API de Rick and Morty</Button>
+          <Button variant="outlined" className="init-btn">
+            Ir a API de Rick and Morty
+          </Button>
         </Link>
       </Stack>
     );
@@ -26,7 +30,6 @@ export const Inicio: React.FC = () => {
 
   return (
     <div className="init">
-      <h1>Inicio</h1>
       <div className="api">
         {goToApiorganization()}
         {goToApiRichAndMorty()}
