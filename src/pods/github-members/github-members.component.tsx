@@ -10,8 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { Alert } from "@mui/material";
-import { CheckCircleOutline } from "@mui/icons-material";
+import "./github-members.styles.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -26,6 +25,7 @@ export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleClose = () => {
     setOpen(false);
@@ -35,19 +35,26 @@ export const LoginPage: React.FC = () => {
     setOpen(true);
   };
 
+  const normalizeString = (str: string) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
   const handleNavigation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const lowercaseUsername = username.toLowerCase();
+    const validateOrganization = normalizeString(username);
 
-    if (
-      lowercaseUsername === "lemoncode" ||
-      lowercaseUsername === "microsoft"
-    ) {
-      navigate(`/list/${lowercaseUsername}`);
-    } else {
-      showModal();
-    }
+    fetch(`https://api.github.com/orgs/${validateOrganization}`)
+      .then((response) => {
+        if (response.ok) {
+          navigate(`/github-members-list/${validateOrganization}`);
+        } else {
+          showModal();
+        }
+      })
+      .catch((error) => {
+        console.error("Error en la solicitud:", error);
+      });
   };
 
   const getForm = () => {
@@ -70,6 +77,7 @@ export const LoginPage: React.FC = () => {
             variant="outlined"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="lemoncode, microsoft..."
           />
         </Box>
         <Box sx={{ m: 1 }}>
@@ -77,9 +85,6 @@ export const LoginPage: React.FC = () => {
             Buscar
           </Fab>
         </Box>
-        <span className="login-text">
-          *Puedes filtrar por Lemoncode o Microsoft
-        </span>
       </>
     );
   };

@@ -1,0 +1,19 @@
+.init {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to right, #ffcccc, #ccffcc);
+}
+
+.init-btn {
+  height: 60px;
+}
+
+.api {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

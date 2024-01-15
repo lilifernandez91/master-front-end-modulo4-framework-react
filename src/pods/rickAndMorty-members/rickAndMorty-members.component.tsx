@@ -1,6 +1,7 @@
 import { Box, Fab } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./rickAndMorty-members.styles.css";
 
 interface Character {
   id: number;
@@ -23,7 +24,8 @@ export const RickAndMorty: React.FC = () => {
       .then((response) => response.json())
       .then((json: ApiResponse) => {
         setData(json);
-      });
+      })
+      .catch((error) => console.error("Error en la solicitud:", error));
   }, []);
 
   const showData = () => {

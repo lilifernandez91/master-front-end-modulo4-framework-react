@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
 import { Box, Fab } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "./github-members.styles.css";
 
 const columns = [
   { id: "avatar_url", label: "Avatar", minWidth: 170 },
@@ -36,7 +37,8 @@ export const ListPage: React.FC = () => {
       .then((response) => response.json())
       .then((json) => {
         setMembers(json);
-      });
+      })
+      .catch((error) => console.error("Error en la solicitud:", error));
   }, [orgName]);
 
   const handleChangePage = (event, newPage) => {
@@ -50,7 +52,7 @@ export const ListPage: React.FC = () => {
 
   const handleClick = (row: MemberEntity) => {
     localStorage.setItem("avatar_url", row.avatar_url);
-    navigate(`/detail/${row.id}/${orgName}/${row.login}`);
+    navigate(`/../../github-members-details/${row.id}/${orgName}/${row.login}`);
   };
 
   const getTable = () => {
@@ -125,7 +127,7 @@ export const ListPage: React.FC = () => {
 
   const getBtn = () => {
     return (
-      <Link className="table-link" to="/login">
+      <Link className="table-link" to="/github-members">
         <Box sx={{ m: 1 }}>
           <Fab color="primary" variant="extended">
             Volver

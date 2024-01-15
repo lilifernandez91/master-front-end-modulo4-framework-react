@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import "./github-members.styles.css";
 
 export const DetailPage: React.FC = () => {
   const { id, orgName, userName } = useParams<{
@@ -50,7 +51,10 @@ export const DetailPage: React.FC = () => {
             >
               {userName}
             </Typography>
-            <Link className="card-detail-link" to={`/list/${orgName}`}>
+            <Link
+              className="card-detail-link"
+              to={`/github-members-list/${orgName}`}
+            >
               Volver
             </Link>
           </CardContent>
