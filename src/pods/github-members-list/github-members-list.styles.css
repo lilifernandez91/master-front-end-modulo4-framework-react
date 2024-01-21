@@ -1,0 +1,17 @@
+.table-link {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.table-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login {
+  color: #1665c0;
+  text-decoration: underline;
+  cursor: pointer;
+}

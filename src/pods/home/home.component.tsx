@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import "./home-page.styles.css";
 
-export const Inicio: React.FC = () => {
+export const HomeComponent: React.FC = () => {
   const goToApiorganization = () => {
     return (
       <Stack spacing={2} direction="row">
@@ -30,11 +30,9 @@ export const Inicio: React.FC = () => {
   };
 
   return (
-    <div className="init">
-      <div className="api">
-        {goToApiorganization()}
-        {goToApiRichAndMorty()}
-      </div>
+    <div className="api">
+      {goToApiorganization()}
+      {goToApiRichAndMorty()}
     </div>
   );
 };
