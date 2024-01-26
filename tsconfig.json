@@ -9,10 +9,13 @@
     "sourceMap": true,
     "jsx": "react",
     "noLib": false,
-    "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "lista", "miembros", "detalles"],
   "exclude": ["node_modules"]
 }
