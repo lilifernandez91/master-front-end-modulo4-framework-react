@@ -5,17 +5,19 @@ interface ButtonComponentProps {
   onClick: () => void;
   text: string;
   className?: string;
+  color?: "primary" | "secondary" | "error" | "warning" | "info" | "success";
 }
 
 export const ButtonComponent: React.FC<ButtonComponentProps> = ({
   onClick,
   text,
   className,
+  color = "success",
 }) => {
   return (
     <Button
       variant="contained"
-      color="primary"
+      color={color}
       onClick={onClick}
       className={className}
     >

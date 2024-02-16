@@ -16,7 +16,7 @@ export const RickAndMortyContainer: React.FC = () => {
           onClick={() => {
             navigate(switchRoutes.root);
           }}
-          text="Volver al inicio"
+          text="Volver"
         />
       </div>
       <RickAndMortyComponent />

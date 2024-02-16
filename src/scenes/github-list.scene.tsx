@@ -1,6 +1,11 @@
-import { FormComponent } from "@/pods/github-list/components";
+import { GitHubListContainer } from "@/pods";
 import React from "react";
+import { useParams } from "react-router-dom";
 
-export const GithubList: React.FC = () => {
-  return <FormComponent />;
+export const GitHubList: React.FC = () => {
+  const { organization } = useParams<{
+    organization: string;
+  }>();
+
+  return <GitHubListContainer organization={organization} />;
 };

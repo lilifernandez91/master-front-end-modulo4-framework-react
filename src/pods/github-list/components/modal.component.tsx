@@ -6,7 +6,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import { Typography } from "@mui/material";
-import { GitHubUserApi } from "@/pods/github-list/api";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -18,18 +17,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 interface GithubListModalProps {
-  data: GitHubUserApi[] | null;
+  open: boolean;
+  handleClose: () => void;
 }
 
 export const GithubListModalComponent: React.FC<GithubListModalProps> = ({
-  data,
+  open,
+  handleClose,
 }) => {
-  const [open, setOpen] = React.useState(true);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
       <BootstrapDialog
@@ -54,7 +49,7 @@ export const GithubListModalComponent: React.FC<GithubListModalProps> = ({
         </IconButton>
         <DialogContent dividers>
           <Typography gutterBottom>
-            Nombre de la organización incorrecto. Inténtalo de nuevo.
+            El campo organización no puede estar vacío.
           </Typography>
         </DialogContent>
       </BootstrapDialog>

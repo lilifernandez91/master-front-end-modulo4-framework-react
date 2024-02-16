@@ -53,3 +53,9 @@
   width: 100%;
   height: 200px;
 }
+
+.rick-and-morty-filter {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}

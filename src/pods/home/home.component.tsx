@@ -9,9 +9,9 @@ export const HomeComponent: React.FC = () => {
   const goToApiorganization = () => {
     return (
       <Stack spacing={2} direction="row">
-        <Link to={switchRoutes.githubList}>
+        <Link to={switchRoutes.organization}>
           <Button variant="outlined" className="init-btn">
-            Ir a API de Organización
+            Buscar por organización
           </Button>
         </Link>
       </Stack>
@@ -23,7 +23,7 @@ export const HomeComponent: React.FC = () => {
       <Stack spacing={2} direction="row">
         <Link to={switchRoutes.rickAndMorty}>
           <Button variant="outlined" className="init-btn">
-            Ir a API de Rick and Morty
+            Buscar personajes de Rick and Morty
           </Button>
         </Link>
       </Stack>

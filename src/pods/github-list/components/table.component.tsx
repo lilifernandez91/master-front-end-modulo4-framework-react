@@ -1,110 +1,105 @@
-import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import { GitHubUserApi } from "@/pods/github-list/api";
+import React, { useEffect, useState } from "react";
+import { getGitHubListData } from "@/pods/github-list/api/api";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TablePagination,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { ButtonComponent } from "@/common-app/components";
+import { switchRoutes } from "@/router/routes";
 
-const columns = [
-  { id: "avatar_url", label: "Avatar", minWidth: 170 },
-  { id: "id", label: "Id", minWidth: 170, align: "right" },
-  { id: "login", label: "Usuario", minWidth: 170, align: "right" },
-];
-
-export const GithubListTableComponent: React.FC<{
-  data: GitHubUserApi[] | null;
-}> = ({ data }) => {
+export const GitHubListTableComponent: React.FC<{
+  organization: string;
+}> = ({ organization }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  useEffect(() => {
+    getGitHubListData(organization)
+      .then((responseData) => {
+        setData(responseData);
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos:", error);
+      });
+  }, [organization]);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   return (
-    <>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    style={{
-                      minWidth: column.minWidth,
-                      background: "#F0F0F0",
-                      fontSize: "20px",
-                    }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data
-                ? data
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.id}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-
-                          return (
-                            <TableCell
-                              key={column.id}
-                              style={{ padding: "10px" }}
-                            >
-                              {column.id === "avatar_url" ? (
-                                <img
-                                  src={value}
-                                  alt={`Avatar de ${row.login}`}
-                                  width="100px"
-                                />
-                              ) : column.id === "login" ? (
-                                <div className="login">{value}</div>
-                              ) : (
-                                value
-                              )}
-                            </TableCell>
+    <Paper>
+      <TableContainer>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center"></TableCell>
+              <TableCell align="center">Avatar</TableCell>
+              <TableCell align="center">Nombre de usuario</TableCell>
+              <TableCell align="center">Detalles</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data &&
+              data
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((character, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="center">{index + 1}</TableCell>
+                    <TableCell align="center">
+                      <img
+                        className="github-list-image"
+                        src={character.avatar_url}
+                        alt={character.login}
+                        style={{ width: "80px", height: "80px" }}
+                      />
+                    </TableCell>
+                    <TableCell align="center">{character.login}</TableCell>
+                    <TableCell align="center">
+                      <ButtonComponent
+                        onClick={() => {
+                          navigate(
+                            `${switchRoutes.githubDetail}/${organization}/${character.login}`
                           );
-                        })}
-                      </TableRow>
-                    ))
-                : null}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 15, 30]}
-          component="div"
-          count={data ? data.length : 0}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </>
+                        }}
+                        text="Ver"
+                        color="primary"
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to, count }) =>
+          `${from}-${to} de ${count}`
+        }
+        labelRowsPerPage="Filas por página:"
+      />
+    </Paper>
   );
 };

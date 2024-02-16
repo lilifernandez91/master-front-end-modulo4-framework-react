@@ -3,6 +3,8 @@ import { generatePath } from "react-router-dom";
 interface SwitchRoutes {
   root: string;
   githubList: string;
+  organization: string;
+  githubDetail: string;
   rickAndMorty: string;
 }
 
@@ -13,6 +15,8 @@ interface Routes extends Omit<SwitchRoutes, "detail"> {
 export const switchRoutes: SwitchRoutes = {
   root: "/",
   githubList: "/github-list",
+  organization: "/organization",
+  githubDetail: "/github-detail",
   rickAndMorty: "/rick-and-morty",
 };
 

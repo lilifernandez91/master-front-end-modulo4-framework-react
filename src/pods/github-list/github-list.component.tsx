@@ -1,24 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { GithubListTableComponent } from "@/pods/github-list/components/";
-import { GitHubUserApi, getGithubData } from "./api";
+import React from "react";
+import { GitHubListTableComponent } from "@/pods/github-list/components/table.component";
 
-export const GithubListComponent: React.FC<{
-  orgOrganization: string | null;
-}> = ({ orgOrganization }) => {
-  const [data, setData] = useState<GitHubUserApi[] | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const githubData = await getGithubData(orgOrganization);
-        setData(githubData);
-      } catch (error) {
-        console.error("Error fetching Github data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return <GithubListTableComponent data={data} />;
+export const GitHubListComponent: React.FC<{
+  organization: string;
+}> = ({ organization }) => {
+  return <GitHubListTableComponent organization={organization} />;
 };
