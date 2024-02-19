@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { getGitHubListData } from "@/pods/github-list/api/api";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,24 +12,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "@/common-app/components";
 import { switchRoutes } from "@/router/routes";
+import { MemberDetailApi } from "@/pods/github-list/api/apiModel";
 
 export const GitHubListTableComponent: React.FC<{
   organization: string;
-}> = ({ organization }) => {
+  data: MemberDetailApi[];
+}> = ({ organization, data }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getGitHubListData(organization)
-      .then((responseData) => {
-        setData(responseData);
-      })
-      .catch((error) => {
-        console.error("Error al obtener datos:", error);
-      });
-  }, [organization]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

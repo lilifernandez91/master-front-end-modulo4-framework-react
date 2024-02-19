@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getRickAndMortyData } from "@/pods/rickAndMorty/api/api";
 import CharacterFilter from "@/pods/rickAndMorty/components/characterFilter.component";
+import { MemberDetailApi } from "@/pods/rickAndMorty/api/apiModel";
 
-export const RickAndMortyCardComponent: React.FC = () => {
-  const [data, setData] = useState([]);
+interface Props {
+  data: MemberDetailApi[];
+}
 
-  useEffect(() => {
-    getRickAndMortyData()
-      .then((responseData) => {
-        setData(responseData);
-      })
-      .catch((error) => {
-        console.error("Error al obtener datos de personajes:", error);
-      });
-  }, []);
-
+export const RickAndMortyCardComponent: React.FC<Props> = ({ data }) => {
   return <CharacterFilter data={data} />;
 };

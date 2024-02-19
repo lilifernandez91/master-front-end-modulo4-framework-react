@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Card,
   CardActionArea,
@@ -6,24 +6,13 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { getGitHubDetailData } from "@/pods/github-detail/api/api";
+import { MemberDetailApi } from "@/pods/github-detail/api/apiModel";
 
 const DetailCardComponent: React.FC<{
   memberId: string;
-}> = ({ memberId }) => {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    getGitHubDetailData(memberId)
-      .then((responseData) => {
-        setData(responseData);
-      })
-      .catch((error) => {
-        console.error("Error al obtener detalles de un miembro:", error);
-      });
-  }, [memberId]);
-
-  const formatName = (name) => {
+  data: MemberDetailApi;
+}> = ({ memberId, data }) => {
+  const formatName = (name: string) => {
     if (!name) return "";
     return name
       .split(/(?=[A-Z])/)
