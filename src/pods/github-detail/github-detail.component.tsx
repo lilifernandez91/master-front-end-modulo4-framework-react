@@ -5,6 +5,13 @@ import { MemberDetailApi } from "@/pods/github-detail/api/apiModel";
 export const GitHubDetailComponent: React.FC<{
   memberId: string;
   data: MemberDetailApi;
-}> = ({ memberId, data }) => {
-  return <DetailCardComponent memberId={memberId} data={data} />;
+  organization: string;
+}> = ({ memberId, data, organization }) => {
+  return (
+    <DetailCardComponent
+      memberId={memberId}
+      data={data}
+      organization={organization}
+    />
+  );
 };

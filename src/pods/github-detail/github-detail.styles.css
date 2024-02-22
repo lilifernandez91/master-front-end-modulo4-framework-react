@@ -1,25 +1,17 @@
 .github-detail-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
   height: 100%;
 }
 
 .github-detail-title {
   font-size: 24px;
-  text-align: center;
-}
-
-.github-detail-button {
-  display: flex;
-  justify-content: center;
 }
 
 .github-detail-card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 36px;
   height: 100%;
   .MuiPaper-root {
     width: 300px;

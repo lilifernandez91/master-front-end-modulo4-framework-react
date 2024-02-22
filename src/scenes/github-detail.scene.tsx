@@ -3,12 +3,12 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 export const GitHubDetail: React.FC = () => {
-  const { organization, memberId } = useParams<{
-    organization: string;
+  const { memberId, organization } = useParams<{
     memberId: string;
+    organization: string;
   }>();
 
   return (
-    <GitHubDetailContainer organization={organization} memberId={memberId} />
+    <GitHubDetailContainer memberId={memberId} organization={organization} />
   );
 };

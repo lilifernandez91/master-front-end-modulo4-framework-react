@@ -1,6 +1,6 @@
 import React from "react";
-import { RouterComponent } from "./router";
-import { OrganizationProvider } from "./core";
+import { RouterComponent } from "@/router";
+import { OrganizationProvider } from "@/core";
 
 export const App = () => {
   return (

@@ -7,11 +7,17 @@ import {
   Typography,
 } from "@mui/material";
 import { MemberDetailApi } from "@/pods/github-detail/api/apiModel";
+import { ButtonComponent } from "@/common-app/components/button.component";
+import { useNavigate } from "react-router";
+import { switchRoutes } from "@/router/routes";
 
 const DetailCardComponent: React.FC<{
   memberId: string;
   data: MemberDetailApi;
-}> = ({ memberId, data }) => {
+  organization: string;
+}> = ({ memberId, data, organization }) => {
+  const navigate = useNavigate();
+
   const formatName = (name: string) => {
     if (!name) return "";
     return name
@@ -22,6 +28,15 @@ const DetailCardComponent: React.FC<{
 
   return (
     <div className="github-detail-card">
+      <h1 className="github-detail-title">Miembros de la Organización</h1>
+      <div className="github-detail-button">
+        <ButtonComponent
+          onClick={() => {
+            navigate(`${switchRoutes.githubList}/${organization}`);
+          }}
+          text="Volver"
+        />
+      </div>
       {data && (
         <Card>
           <CardActionArea>
