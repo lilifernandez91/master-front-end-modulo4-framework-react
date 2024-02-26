@@ -1,11 +1,16 @@
 import React from "react";
-import { RickAndMortyCardComponent } from "@/pods/rickAndMorty/components/card.component";
-import { MemberDetailApi } from "@/pods/rickAndMorty/api/apiModel";
+import { RickAndMortyCardComponent } from "./components/card.component";
+import { MemberDetail } from "./rickAndMorty.vm";
+import "./rickAndMorty.styles.css";
 
 interface Props {
-  data: MemberDetailApi[];
+  data: MemberDetail[];
 }
 
 export const RickAndMortyComponent: React.FC<Props> = ({ data }) => {
-  return <RickAndMortyCardComponent data={data} />;
+  return (
+    <div className="rick-and-morty-container">
+      <RickAndMortyCardComponent data={data} />
+    </div>
+  );
 };

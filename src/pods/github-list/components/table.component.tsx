@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -9,14 +10,13 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { ButtonComponent } from "@/common-app/components";
+import { ButtonComponent } from "@/common-app/components/button.component";
 import { switchRoutes } from "@/router/routes";
-import { MemberDetailApi } from "@/pods/github-list/api/apiModel";
+import { MemberDetail } from "../github-list.vm";
 
 export const GitHubListTableComponent: React.FC<{
   organization: string;
-  data: MemberDetailApi[];
+  data: MemberDetail[];
 }> = ({ organization, data }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);

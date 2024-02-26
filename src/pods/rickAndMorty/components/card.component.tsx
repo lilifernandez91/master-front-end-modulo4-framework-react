@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { MemberDetailApi } from "@/pods/rickAndMorty/api/apiModel";
+import { useNavigate } from "react-router";
 import { TextField } from "@mui/material";
 import { ButtonComponent } from "@/common-app/components/button.component";
 import { switchRoutes } from "@/router/routes";
-import { useNavigate } from "react-router";
+import { MemberDetail } from "../rickAndMorty.vm";
 
 interface Props {
-  data: MemberDetailApi[];
+  data: MemberDetail[];
 }
 
 export const RickAndMortyCardComponent: React.FC<Props> = ({ data }) => {
@@ -38,8 +38,8 @@ export const RickAndMortyCardComponent: React.FC<Props> = ({ data }) => {
         />
       </div>
       <div className="rick-and-morty-cards">
-        {filteredData.map((character) => (
-          <div key={character.id} className="rick-and-morty-card">
+        {filteredData.map((character, index) => (
+          <div key={index} className="rick-and-morty-card">
             <img
               className="rick-and-morty-image"
               src={character.image}

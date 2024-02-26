@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "@/pods/github-list/github-list.styles.css";
-import { GitHubListComponent } from "@/pods/github-list/github-list.component";
-import { getGitHubListData } from "@/pods/github-list/api/api";
+import { GitHubListComponent } from "./github-list.component";
+import { getGitHubListData } from "./api";
+import { mapMemberListFromApiToVm } from "./github-list.mappers";
 
 export const GitHubListContainer: React.FC<{
   organization: string;
@@ -11,16 +11,12 @@ export const GitHubListContainer: React.FC<{
   useEffect(() => {
     getGitHubListData(organization)
       .then((responseData) => {
-        setData(responseData);
+        setData(mapMemberListFromApiToVm(responseData));
       })
       .catch((error) => {
         console.error("Error al obtener datos:", error);
       });
   }, [organization]);
 
-  return (
-    <div className="github-list-container">
-      <GitHubListComponent organization={organization} data={data} />
-    </div>
-  );
+  return <GitHubListComponent organization={organization} data={data} />;
 };

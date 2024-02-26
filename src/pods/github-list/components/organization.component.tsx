@@ -1,10 +1,10 @@
-import { ButtonComponent } from "@/common-app/components";
-import { switchRoutes } from "@/router/routes";
-import { TextField, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GithubListModalComponent } from "@/pods/github-list/components/modal.component";
+import { TextField, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { ButtonComponent } from "@/common-app/components/button.component";
+import { switchRoutes } from "@/router/routes";
+import { GithubListModalComponent } from "../components/modal.component";
 
 export const OrganizationComponent: React.FC = () => {
   const navigate = useNavigate();

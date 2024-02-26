@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import {
   Card,
   CardActionArea,
@@ -6,14 +7,13 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { MemberDetailApi } from "@/pods/github-detail/api/apiModel";
 import { ButtonComponent } from "@/common-app/components/button.component";
-import { useNavigate } from "react-router";
 import { switchRoutes } from "@/router/routes";
+import { MemberDetail } from "../github-detail.vm";
 
 const DetailCardComponent: React.FC<{
   memberId: string;
-  data: MemberDetailApi;
+  data: MemberDetail;
   organization: string;
 }> = ({ memberId, data, organization }) => {
   const navigate = useNavigate();

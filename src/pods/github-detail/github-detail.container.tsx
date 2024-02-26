@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "@/pods/github-detail/github-detail.styles.css";
-import { GitHubDetailComponent } from "@/pods/github-detail/github-detail.component";
-import { getGitHubDetailData } from "@/pods/github-detail/api/api";
+import { GitHubDetailComponent } from "./github-detail.component";
+import { getGitHubDetailData } from "./api";
+import { mapMemberListFromApiToVm } from "./github-detail.mappers";
 
 export const GitHubDetailContainer: React.FC<{
   memberId: string;
@@ -12,7 +12,7 @@ export const GitHubDetailContainer: React.FC<{
   useEffect(() => {
     getGitHubDetailData(memberId)
       .then((responseData) => {
-        setData(responseData);
+        setData(mapMemberListFromApiToVm(responseData));
       })
       .catch((error) => {
         console.error("Error al obtener detalles de un miembro:", error);
@@ -20,12 +20,10 @@ export const GitHubDetailContainer: React.FC<{
   }, [memberId]);
 
   return (
-    <div className="github-detail-container">
-      <GitHubDetailComponent
-        memberId={memberId}
-        data={data}
-        organization={organization}
-      />
-    </div>
+    <GitHubDetailComponent
+      memberId={memberId}
+      data={data}
+      organization={organization}
+    />
   );
 };

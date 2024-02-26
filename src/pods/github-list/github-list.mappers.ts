@@ -1,10 +1,15 @@
 import * as api from "@/pods/github-list/api/apiModel";
 import * as vm from "@/pods/github-list/github-list.vm";
 
-export const mapMemberFromApiToVm = (
+const mapMemberFromApiToVm = (
     member: api.MemberDetailApi
 ): vm.MemberDetail => ({
-    id: member.id,
-    login: member.login,
-    avatar_url: member.avatar_url,
+    id: member?.id ?? 0,
+    login: member?.login ?? "",
+    avatar_url: member?.avatar_url ?? "",
 });
+
+export const mapMemberListFromApiToVm = (
+    memberList: api.MemberDetailApi[]
+): vm.MemberDetail[] => memberList.map(mapMemberFromApiToVm);
+

@@ -1,9 +1,9 @@
 import React from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { switchRoutes } from "@/router/routes";
-import "@/pods/home/home.styles.css";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import "./home.styles.css";
 
 export const HomeComponent: React.FC = () => {
   const goToApiorganization = () => {
